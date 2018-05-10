@@ -1,0 +1,92 @@
+$cardWidth: 110px;
+$cardHeight: 180px;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#actions {
+    margin: 20px 0 10px;
+    padding: 0 30px;
+}
+
+#wrapper {
+    padding: 0 30px;
+    width: 100%;
+
+    &:after {
+        content: ' ';
+        display: table;
+        clear: both;
+    }
+
+    > * {
+        float: left;
+    }
+}
+
+#dealt {
+    position: relative;
+    margin: 10px 0;
+    background: #eee;
+    border-radius: 6px;
+    overflow: hidden;
+    width: $cardWidth;
+    height: $cardHeight;
+}
+
+#display {
+    margin: 10px 20px;
+    height: $cardHeight;
+}
+
+#stack {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    list-style: none;
+}
+
+div.card,
+li {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    width: $cardWidth;
+    height: $cardHeight;
+    border: 1px solid #000;
+    border-radius: 6px;
+    text-align: center;
+
+    &.diamonds,
+    &.hearts {
+        color: red;
+    }
+
+    &.clubs,
+    &.spades {
+        color: black;
+    }
+
+    span {
+        position: absolute;
+        top: 2px;
+        right: 0;
+        width: 20px;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+
+        &.csuit {
+            top: 22px;
+            text-transform: capitalize;
+        }
+    }
+}
