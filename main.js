@@ -38,17 +38,6 @@ function shuffle(deck) {
   return deck;
 }
 
-function spreadCards() {
-  var stack = document.getElementById('stack');
-  var cards = stack.getElementsByTagName('li');
-
-  for (var i = 0; i < cards.length; i++) {
-    let card = cards[i];
-    card.style.zIndex = -i;
-    card.style.left = i * 20 + 'px';
-  }
-}
-
 function unicodeSuit(suit) {
   let unicode = '';
   switch (suit) {
@@ -67,6 +56,17 @@ function unicodeSuit(suit) {
   return unicode;
 }
 
+function spreadCards() {
+  var stack = document.getElementById('stack');
+  var cards = stack.getElementsByTagName('li');
+
+  for (var i = 0; i < cards.length; i++) {
+    let card = cards[i];
+    card.style.zIndex = -i;
+    card.style.left = i * 20 + 'px';
+  }
+}
+
 function display(deck) {
   let html = '<ul id="stack">';
   for (var i = 0; i < deck.length; i++) {
@@ -79,26 +79,26 @@ function display(deck) {
   spreadCards();
 }
 
-// deal card from top of cards array, then pushes card to end of array
 function dealCard() {
-  // shift first card off deck
+  const elem = document.getElementById('dealt');
+  // shift top card off deck
   let card = cards.shift();
-  // display card
-  document.getElementById('dealt').setAttribute('data-card', JSON.stringify(card));
-  document.getElementById('dealt').innerHTML = '<div class="card ' + card.suit + '"><span class="cname">' +
+  // place dealt card in html element
+  elem.setAttribute('data-card', JSON.stringify(card));
+  elem.innerHTML = '<div class="card ' + card.suit + '"><span class="cname">' +
     card.name + '</span><span class="csuit">' + unicodeSuit(card.suit) + '</span></div>';
-
 }
 
 function resetDealtCard() {
-  let card = document.getElementById('dealt').getAttribute('data-card');
+  const elem = document.getElementById('dealt');
+  let card = elem.getAttribute('data-card');
   if (card !== "" && card !== null) {
-    // push to back of deck
+    // push dealt card to back of deck
     cards.push(JSON.parse(card));
-    document.getElementById('dealt').setAttribute('data-card', '');
+    elem.setAttribute('data-card', '');
   }
   // clear dealt card display
-  document.getElementById('dealt').innerHTML = '';
+  elem.innerHTML = '';
 }
 
 function onClickShuffleDeck() {
@@ -113,7 +113,8 @@ function onClickDealCard() {
   display(cards);
 }
 
-// shuffle and display a new deck of cards
+// display a new deck of cards
 var cards = new deck();
-shuffle(cards);
+// unshuffled to visualize dealing function
+// shuffle(cards);
 display(cards);
