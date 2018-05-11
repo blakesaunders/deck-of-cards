@@ -12,7 +12,7 @@ body {
 }
 
 #actions {
-    margin: 20px 0 10px;
+    margin: 20px 0;
     padding: 0 30px;
 }
 
@@ -33,7 +33,7 @@ body {
 
 #dealt {
     position: relative;
-    margin: 10px 0;
+    margin: 0 20px 0 0;
     background: #eee;
     border-radius: 6px;
     overflow: hidden;
@@ -42,7 +42,7 @@ body {
 }
 
 #display {
-    margin: 10px 20px;
+    margin: 0;
     height: $cardHeight;
 }
 

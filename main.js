@@ -21,6 +21,8 @@ function deck() {
 function shuffle(deck) {
   let counter = deck.length;
 
+  console.log('Shuffling cards...');
+
   // While there are cards in the deck
   while (counter > 0) {
     // Pick a random index
@@ -34,6 +36,8 @@ function shuffle(deck) {
     deck[counter] = deck[index];
     deck[index] = temp;
   }
+
+  console.log(deck);
 
   return deck;
 }
@@ -70,7 +74,7 @@ function spreadCards() {
 function display(deck) {
   let html = '<ul id="stack">';
   for (var i = 0; i < deck.length; i++) {
-    card = deck[i];
+    let card = deck[i];
     html += '<li class="' + card.suit + '"><span class="cname">' + card.name +
       '</span><span class="csuit">' + unicodeSuit(card.suit) + '</span></li>';
   }
@@ -83,6 +87,11 @@ function dealCard() {
   const elem = document.getElementById('dealt');
   // shift top card off deck
   let card = cards.shift();
+  
+  console.log('Dealing new card...');
+  console.log(card);
+  console.log(cards);
+
   // place dealt card in html element
   elem.setAttribute('data-card', JSON.stringify(card));
   elem.innerHTML = '<div class="card ' + card.suit + '"><span class="cname">' +
@@ -91,10 +100,11 @@ function dealCard() {
 
 function resetDealtCard() {
   const elem = document.getElementById('dealt');
-  let card = elem.getAttribute('data-card');
-  if (card !== "" && card !== null) {
+  const json = elem.getAttribute('data-card');
+  if (json !== "" && json !== null) {
     // push dealt card to back of deck
-    cards.push(JSON.parse(card));
+    const dealtCard = JSON.parse(json);
+    cards.push(new card(dealtCard.value, dealtCard.name, dealtCard.suit));
     elem.setAttribute('data-card', '');
   }
   // clear dealt card display
